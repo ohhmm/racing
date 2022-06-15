@@ -59,3 +59,6 @@ if(QT_VERSION_MAJOR EQUAL 6)
     qt_import_qml_plugins(Karts)
     qt_finalize_executable(Karts)
 endif()
+
+
+fold()

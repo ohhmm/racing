@@ -12,3 +12,6 @@ _deps
 /build*/
 /.vs
 /out/
+/.settings
+/.cproject
+/.project
