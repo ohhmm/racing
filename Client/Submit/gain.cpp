@@ -1,13 +1,22 @@
+#include "SubmitApi.h"
+
 #include <cstdlib>
 #include <cstring>
 #include <iostream>
 #include <boost/asio.hpp>
 
+
+
+
 using boost::asio::ip::tcp;
 
-auto max_length = 1000000;
-
-int main(int argc, char* argv[])
+namespace{
+	auto max_length = 1000000;
+	boost::asio::io_context io_context;
+	tcp::socket s(io_context);
+	tcp::resolver resolver(io_context);
+}
+int gain(int argc, char* argv[])
 {
 	try
 	{
@@ -17,10 +26,6 @@ int main(int argc, char* argv[])
 			return 1;
 		}
 
-		boost::asio::io_context io_context;
-
-		tcp::socket s(io_context);
-		tcp::resolver resolver(io_context);
 		boost::asio::connect(s, resolver.resolve(argv[1], argv[2]));
 		{
 			std::cout << "Enter message: ";
@@ -45,3 +50,4 @@ int main(int argc, char* argv[])
 
 	return 0;
 }
+

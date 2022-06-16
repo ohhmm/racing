@@ -1,9 +1,15 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
-#include <QtQuickDialogs2/QtQuickDialogs2>
+#include <QtQuickControls2/QtQuickControls2>
+#include <QFile>
+#include <QSocketNotifier>
 
-void Send(){
-    btn.text = "Ok";
+
+Q_INVOKABLE void send(QString s){
+    QFile f(s);
+    if(f.exists()){
+        QProcess p;
+    }
 }
 
 int main(int argc, char *argv[])
