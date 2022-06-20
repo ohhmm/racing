@@ -8,7 +8,8 @@
 Q_INVOKABLE void send(QString s){
     QFile f(s);
     if(f.exists()){
-        QProcess p;
+		QProcess send;
+		//send.start("Submit/Submit", s)
     }
 }
 

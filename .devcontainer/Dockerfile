@@ -25,6 +25,10 @@ ARG REINSTALL_CMAKE_VERSION_FROM_SOURCE="none"
 
 #RUN emerge dev-qt/qtcore -j`nproc`
 
+RUN emerge --sync && eix-update
+
+RUN emerge dev-qt/qtcore -j`nproc`
+
 RUN emerge \
     app-eselect/eselect-fontconfig \
     -j`nproc`
@@ -34,4 +38,9 @@ RUN echo "x11-libs/libxkbcommon X" >> /etc/portage/package.use/qt
 RUN echo "app-text/xmlto text" >> /etc/portage/package.use/qt
 RUN echo "dev-qt/qt-creator **" > /etc/portage/package.accept_keywords/qt
 RUN echo "dev-qt/qtquicktimeline **" >> /etc/portage/package.accept_keywords/qt
-RUN emerge dev-qt/qt-creator -j`nproc`
+
+
+RUN emerge dev-python/PyQt5 -j`nproc`
+
+#RUN emerge -j`nproc` gobject-introspection
+#RUN emerge dev-qt/qt-creator -j`nproc`
