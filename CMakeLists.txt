@@ -1,5 +1,6 @@
 cmake_minimum_required(VERSION 3.6)
 
+# Find some Git
 find_package(Git QUIET)
 if(NOT GIT_EXECUTABLE)
     find_program(GIT_EXECUTABLE git PATHS
@@ -8,8 +9,22 @@ if(NOT GIT_EXECUTABLE)
     find_package(Git)
 endif()
 
+# Fetch some OpenMind
 include(FetchContent)
 FetchContent_Declare(openmind GIT_REPOSITORY https://github.com/ohhmm/openmind.git GIT_TAG main)
 FetchContent_MakeAvailable(openmind)
 
+# Tell OpenMind to use any boost version installed in the system if any
+find_package(Boost)
+if(Boost_FOUND)
+    set(OPENMIND_REQUIRED_BOOST_VERSION ${Boost_VERSION} CACHE VERSION "Boost library version to use" FORCE)
+endif()
+
+# Ask OpenMind to iterate folders and create projects
 fold()
+
+# Select C++ active standard
+enable_language(CXX)
+set (CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_EXTENSIONS OFF)

@@ -15,3 +15,6 @@ _deps
 /.settings
 /.cproject
 /.project
+*.user.*
+*.user
+/.cache/clangd/index

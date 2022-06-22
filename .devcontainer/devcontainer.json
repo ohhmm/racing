@@ -7,15 +7,16 @@
 	"context": "..",
 
 	// Update the 'dockerFile' property if you aren't using the standard 'Dockerfile' filename.
-	"dockerFile": "ohhmm/racing",
+	"dockerFile": "Dockerfile",
 
 	// Set *default* container specific settings.json values on container create.
 	"settings": {
 		"cmake.cmakePath": "/usr/bin/cmake",
 		"cmake.configureArgs": [
 			"-DOPENMIND_BUILD_SAMPLES=OFF",
-			"-DOPENMIND_BUILD_TESTS=ON",
-			//"-DOPENMIND_MATH_USE_FOUNDATIONDB_CACHE:BOOL=ON",
+			"-DOPENMIND_BUILD_TESTS=OFF",
+			"-DOPENMIND_MATH_USE_LEVELDB_CACHE:BOOL=OFF",
+			"-DOPENMIND_MATH_USE_FOUNDATIONDB_CACHE:BOOL=OFF",
 		],
 	},
 	
