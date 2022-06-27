@@ -1,35 +1,20 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
-#include <QtQuickControls2/QtQuickControls2>
-#include <QFile>
-#include <QSocketNotifier>
-
-
-Q_INVOKABLE void send(QString s){
-    QFile f(s);
-    if(f.exists()){
-		QProcess send;
-		//send.start("Submit/Submit", s)
-    }
-}
+#include "backend.h"
 
 int main(int argc, char *argv[])
 {
-#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
+//    qputenv("QSG_VISUALIZE", "overdraw");
+
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
-#endif
+
     QGuiApplication app(argc, argv);
 
+    qmlRegisterType<Backend>("io.qt.Backend", 1, 0, "Backend");
+
     QQmlApplicationEngine engine;
-    const QUrl url(QStringLiteral("qrc:/main.qml"));
-    QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,
-                     &app, [url](QObject *obj, const QUrl &objUrl) {
-        if (!obj && url == objUrl)
-            QCoreApplication::exit(-1);
-    }, Qt::QueuedConnection);
-    engine.load(url);
-
-
+    engine.load(QUrl(QStringLiteral("qrc:/main.qml")));
+    if (engine.rootObjects().isEmpty()) { return -1; }
 
     return app.exec();
 }
