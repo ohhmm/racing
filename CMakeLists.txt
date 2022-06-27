@@ -1,5 +1,7 @@
 cmake_minimum_required(VERSION 3.6)
 
+project(Karts VERSION 0.1 LANGUAGES CXX)
+
 # Find some Git
 find_package(Git QUIET)
 if(NOT GIT_EXECUTABLE)
@@ -15,6 +17,7 @@ FetchContent_Declare(openmind GIT_REPOSITORY https://github.com/ohhmm/openmind.g
 FetchContent_MakeAvailable(openmind)
 
 # Tell OpenMind to use any boost version installed in the system if any
+option(OPENMIND_MATH_USE_LEVELDB_CACHE "Use Google LevelDB library to cache solutions" OFF)
 find_package(Boost)
 if(Boost_FOUND)
     set(OPENMIND_REQUIRED_BOOST_VERSION ${Boost_VERSION} CACHE VERSION "Boost library version to use" FORCE)

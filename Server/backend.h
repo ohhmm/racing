@@ -9,6 +9,7 @@ class Backend : public QObject
 public:
     using QObject::QObject;
     explicit Backend(QObject *parent);
+    explicit Backend() : Backend(nullptr){}
 
 signals:
     void smbConnected();
