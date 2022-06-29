@@ -1,6 +1,11 @@
 cmake_minimum_required(VERSION 3.6)
 
 project(Karts VERSION 0.1 LANGUAGES CXX)
+# Select C++ active standard
+enable_language(CXX)
+set (CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_EXTENSIONS OFF)
 
 # Find some Git
 find_package(Git QUIET)
@@ -23,11 +28,10 @@ if(Boost_FOUND)
     set(OPENMIND_REQUIRED_BOOST_VERSION ${Boost_VERSION} CACHE VERSION "Boost library version to use" FORCE)
 endif()
 
+
+# Ask OpenMind to enable test projects creation (See WinnerTest)
+option(OPENMIND_BUILD_TESTS "TESTS" ON)
+
 # Ask OpenMind to iterate folders and create projects
 fold()
 
-# Select C++ active standard
-enable_language(CXX)
-set (CMAKE_CXX_STANDARD 20)
-set(CMAKE_CXX_STANDARD_REQUIRED ON)
-set(CMAKE_CXX_EXTENSIONS OFF)

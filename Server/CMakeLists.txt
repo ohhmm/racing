@@ -1,3 +1,3 @@
 
 fold()
-exe(BussinessLogic)
+exe(BusinessLogic)

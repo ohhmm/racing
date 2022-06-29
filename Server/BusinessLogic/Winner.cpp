@@ -1,4 +1,5 @@
 #include "Winner.h"
+#include <cassert>
 #include <chrono>
 #include <vector>
 
