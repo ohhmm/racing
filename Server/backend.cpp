@@ -1,5 +1,9 @@
 #include "backend.h"
 #include "serverStuff.h"
+#include "BusinessLogic/Winner.h"
+
+#include <sstream>
+
 
 Backend::Backend(QObject *parent) : QObject(parent)
 {
@@ -72,5 +76,17 @@ void Backend::smbDisconnectedFromServer()
 
 void Backend::gotNewMesssage(QString msg)
 {
-    emit newMessage(msg);
+    auto s = msg.toStdString();
+    std::stringstream ss(s);
+    ss >> s;
+    if(s == "kart,passingtime"){
+        auto winners = Winner(ss);
+        emit newMessage(QString("1:%1 2:%2 3:%3")
+                        .arg(std::get<0>(winners))
+                        .arg(std::get<1>(winners))
+                        .arg(std::get<2>(winners))
+                        );
+    } else {
+        emit newMessage(msg);
+    }
 }

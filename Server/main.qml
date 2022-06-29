@@ -23,6 +23,7 @@ Window {
         }
         onNewMessage: {
             ti.append(addMsg("New message: " + msg));
+            
         }
     }
 

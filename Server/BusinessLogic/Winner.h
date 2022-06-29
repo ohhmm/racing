@@ -1,7 +1,6 @@
 
-#include <ctime>
 #include <tuple>
-#include <vector>
+#include <sstream>
 
+std::tuple<int, int, int> Winner(std::stringstream&);
 
-std::tuple<int, int, int> Winner(const std::vector<std::pair<int, std::time>>> data);
