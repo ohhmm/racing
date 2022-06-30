@@ -34,5 +34,6 @@ BOOST_AUTO_TEST_CASE(CSVProcessingTest_tests)
     3,12:04:46)data";
     auto _1 = Winner(s);
     decltype(_1) _2 = {1,2,3};
-    BOOST_TEST(_1 == _2);
+    auto ok = _1 == _2;
+    BOOST_TEST(ok);
 }

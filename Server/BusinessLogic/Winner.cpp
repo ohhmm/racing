@@ -6,23 +6,36 @@
 constexpr int MaxPlayers = 100;
 
 std::tuple<int, int, int> Winner(std::stringstream& data){
-    std::vector<int> bestPlayers;
-    std::vector<double> bestLoops;
-    time_t playerLoopTime[MaxPlayers];
-    double playerBestLoop[MaxPlayers];
+    using duration_t = std::chrono::milliseconds;
+    constexpr duration_t Initial = {};
+    duration_t playerLoopTime[MaxPlayers] = {};
 
+    using loop_duration_t = decltype(Initial-Initial);
+    loop_duration_t playerBestLoop[MaxPlayers] = {};
+    constexpr loop_duration_t InitialLoop = {};
+
+    std::vector<int> bestPlayers;
+    std::vector<loop_duration_t> bestLoops;
     while (!data.eof()) {
         int player;
         data >> player;
         char delimeter;
         data >> delimeter;
         assert(delimeter == ',');
-        time_t time;
-        data >> time;
-        
-        if(playerLoopTime[player]){
-            auto loop = difftime(time, playerLoopTime[player]);
-            if(loop < playerBestLoop[player]){
+        int m,s,ms;
+        data >> m >> delimeter >> s >> delimeter >> ms;
+
+        auto min = std::chrono::minutes(m);
+        auto sec = std::chrono::seconds(s);
+        auto msec = std::chrono::milliseconds(ms);
+        auto time = min + sec + msec;
+        if (time < playerLoopTime[player]) {
+            time += std::chrono::hours(1);
+        }
+
+        if(playerLoopTime[player] != Initial){
+            auto loop = time - playerLoopTime[player];
+            if(loop < playerBestLoop[player] || playerBestLoop[player] == InitialLoop) {
                 playerBestLoop[player] = loop;
                 if(bestLoops.size() == 0 || loop < bestLoops[0]){
                     bestLoops.insert(bestLoops.begin(), loop);
